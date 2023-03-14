@@ -121,3 +121,6 @@ lint/tmp/
 # lint/reports/
 
 node_modules
+
+# remix
+.deps/

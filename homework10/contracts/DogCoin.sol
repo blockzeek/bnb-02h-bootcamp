@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: UNLICENSED
-
 pragma solidity 0.8.18;
 
 contract DogCoin {
@@ -22,16 +21,21 @@ contract DogCoin {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner, "Ownable: caller is not the owner");
         _;
     }
 
-    function getTotalSupply() public view onlyOwner returns (uint256) {
+    function getTotalSupply() public view returns (uint256) {
         return totalSupply;
     }
 
-    function increaseTotalSupply() public {
-        totalSupply = totalSupply + 1000;
+    function increaseTotalSupply() public onlyOwner {
+        _mint(1000);
+    }
+
+    function _mint(uint256 amount) internal {
+        totalSupply = totalSupply + amount;
+        balances[owner] += amount;
         emit TotalSupplyChanged(totalSupply);
     }
 
@@ -40,5 +44,11 @@ contract DogCoin {
         balances[recipient] += amount;
         payments[msg.sender].push(Payment(amount, recipient));
         emit BalanceAmountTransferred(amount, recipient);
+    }
+
+    function getPayments(
+        address sender
+    ) public view returns (Payment[] memory) {
+        return payments[sender];
     }
 }

@@ -8,6 +8,7 @@ artifacts
 cache
 deployments
 node_modules
+secrets.json
 
 
 cache/

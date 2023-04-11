@@ -3,23 +3,23 @@ pragma solidity ^0.8.13;
 
 contract Store {
     struct payments {
-        bool valid;
         uint256 amount;
-        address sender;
-        uint8 paymentType;
         uint256 finalAmount;
-        address receiver;
         uint256 initialAmount;
+        address sender;
+        address receiver;
+        uint8 paymentType;
+        bool valid;
         bool checked;
     }
-    uint8 index;
     uint256 public number;
-    bool flag1;
     address admin;
-    mapping(address => uint256) balances;
-    bool flag2;
     address admin2;
+    uint8 index;
+    bool flag1;
+    bool flag2;
     bool flag3;
+    mapping(address => uint256) balances;
     payments[8] topPayments;
 
     constructor() {}
